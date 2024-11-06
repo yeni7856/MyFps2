@@ -158,5 +158,15 @@ namespace Unity.FPS.Gameplay
             return 0;
         }
         
+        //조준 - 마우스 우클릭하는 동안
+        public bool GetAimInputHeld()
+        {
+            if (CanProcessInput())
+            {
+                return Input.GetButton(GameConstants.k_ButtonNameAim);
+            }
+
+            return false;
+        }
     }
 }
