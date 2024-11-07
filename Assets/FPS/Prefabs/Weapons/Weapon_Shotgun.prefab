@@ -244,16 +244,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponRoot: {fileID: 1505447205160222267}
   swithcWeaponSfx: {fileID: 8300000, guid: 7aa1f092f3b652347a6536fd0f23662e, type: 3}
+  shootType: 0
+  maxAmmo: 8
+  delayBetweenShots: 0.5
+  weaponMuzzle: {fileID: 8334323006752503713}
+  muzzleFlashPrefab: {fileID: 748781637555137343, guid: 4f5d4e5eaa0e5104791549cea3dc3f23,
+    type: 3}
+  shootSfx: {fileID: 8300000, guid: 281f980ba51f2524c9d39049ae95dc06, type: 3}
   crosshairDefault:
     CraossHairSprite: {fileID: 21300000, guid: a5d32c431a2104f4bb43f554b94f1e09, type: 3}
     CrossHairSize: 50
-    CraossHairColor: {r: 0.5529412, g: 0.7411765, b: 1, a: 1}
+    CraossHairColor: {r: 0.21226418, g: 1, b: 0.94496053, a: 1}
   crosshairTartgetInSight:
     CraossHairSprite: {fileID: 21300000, guid: a5d32c431a2104f4bb43f554b94f1e09, type: 3}
     CrossHairSize: 40
-    CraossHairColor: {r: 0.6033582, g: 1, b: 0.5529412, a: 1}
+    CraossHairColor: {r: 0.15324174, g: 0.1462264, b: 1, a: 1}
   aimZoomRatio: 0.7
   animOffset: {x: 0, y: 0.13, z: 0}
+  recoilForce: 0.5
+  projectilePrefab: {fileID: 5835953274357033913, guid: f05c7e6fbbfbe824388456bb4abff9d4,
+    type: 3}
 --- !u!1 &2867801751256125023
 GameObject:
   m_ObjectHideFlags: 0
