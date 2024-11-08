@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3659995153115176982}
   - component: {fileID: 8070006393710158492}
+  - component: {fileID: 5073087606462686611}
   m_Layer: 0
   m_Name: Projectile_Blaster
   m_TagString: Untagged
@@ -45,6 +46,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46178b6af7f45a44c975726d33e44fee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 300
+  gravity: 0
+  root: {fileID: 3659995153115176982}
+  tip: {fileID: 1135791333161367127}
+  damage: 15
+  lifeTime: 2
+  hittableLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  impackVfxPrefab: {fileID: 7655095426451682942, guid: a7d68b1a502e02a49b8efb1b86a8c931,
+    type: 3}
+  impactVfxLifeTime: 5
+  impactSfxClip: {fileID: 0}
+--- !u!114 &5073087606462686611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3659995153115176983}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cb3f215b0a6ba146a4532a183820007, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifeTime: 3
 --- !u!1 &5564024855854763701
 GameObject:
   m_ObjectHideFlags: 0

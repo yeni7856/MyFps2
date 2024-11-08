@@ -193,9 +193,11 @@ MonoBehaviour:
     CraossHairColor: {r: 1, g: 0, b: 0, a: 1}
   aimZoomRatio: 0.25
   animOffset: {x: 0, y: 0.06, z: 0}
-  recoilForce: 0.1
+  recoilForce: 0.2
   projectilePrefab: {fileID: 8070006393710158492, guid: 3c6b27d949cdda749892906e1f1d1b27,
     type: 3}
+  bulletsPerShot: 1
+  bulletSpreadAngle: 0
 --- !u!1 &2931720046355103184
 GameObject:
   m_ObjectHideFlags: 0

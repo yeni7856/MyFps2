@@ -48,7 +48,7 @@ namespace Unity.FPS.Game
         public WeaponShootType shootType;
 
         //Ammo 총알 장전 
-        [SerializeField] private float maxAmmo = 8f;        //최대 총알 갯수
+        [SerializeField] private float maxAmmo = 8f;        //장전 최대 총알 갯수
         private float currentAmmo;
 
         [SerializeField] private float delayBetweenShots = 0.5f;    //슛 간격
@@ -75,9 +75,14 @@ namespace Unity.FPS.Game
         //Projectile
         public ProjectileBase projectilePrefab;
 
-        public Vector3 MuzzleWorldVelocity {  get; private set; }       //총구에 발사체 넘겨주기
+        public Vector3 MuzzleWorldVelocity {  get; private set; }       //총구 프레임 속도 
         private Vector3 lastMuzzlePosition;                                     //총구 마지막 위치 
-        public float CurrentCharge { get; private set; }                    
+        public float CurrentCharge { get; private set; }
+
+        [SerializeField] private int bulletsPerShot = 1;                    //한번 슛하는데 발사되는 탄환의 갯수
+        [SerializeField] private float bulletSpreadAngle = 0f;         //뷸렛이 퍼져 나가는 각도
+
+        public float CurretAmmoRatio => currentAmmo / maxAmmo;      
         #endregion
 
         private void Awake()
@@ -90,7 +95,18 @@ namespace Unity.FPS.Game
         {
             //초기화
             currentAmmo = maxAmmo;  //총 알 
-            lastTimeShot = Time.time;     //시작할때 시간 저장   
+            lastTimeShot = Time.time;     //시작할때 시간 저장
+            lastMuzzlePosition = weaponMuzzle.position;
+        }
+        private void Update()
+        {
+            //MuzzleWorldVelocity
+            if(Time.deltaTime > 0f)     //한프레임도는동안 //움직이지않으면 0 
+            {
+                MuzzleWorldVelocity = (weaponMuzzle.position - lastMuzzlePosition) / Time.deltaTime;   //거리/시간 = 속도  
+                
+                lastMuzzlePosition = weaponMuzzle.position;     //마지막머즐 포지션에 
+            }
         }
 
         //무기 활성화, 비활성화 
@@ -116,7 +132,6 @@ namespace Unity.FPS.Game
                     if (inputDown)
                     {
                         return TryShoot();
-                    
                     }
                     break;
                 case WeaponShootType.Automatic:
@@ -126,6 +141,10 @@ namespace Unity.FPS.Game
                     }
                     break;
                 case WeaponShootType.Charge:
+                    if (inputHeld)
+                    {
+                        return TryShoot();
+                    }
                     break;
                 case WeaponShootType.Sniper:
                     if (inputDown)
@@ -159,6 +178,16 @@ namespace Unity.FPS.Game
         //슛 연출 
         void HandleShoot()
         {
+            //project tile 생성
+            //뷸렛 샷만큼 
+            for (int i = 0; i < bulletsPerShot; i++)
+            {
+                Vector3 shotDirection = GetShotDirectionWithinSpread(weaponMuzzle);
+                ProjectileBase projectileInstance =  Instantiate(projectilePrefab, weaponMuzzle.position, Quaternion.LookRotation(shotDirection));
+                //Destroy(projectileInstance.gameObject, 5f);
+                projectileInstance.Shoot(this); //컨트롤러를 매개변수로 
+            }
+           
             //Vfx
             if(muzzleFlashPrefab != null)
             {
@@ -172,7 +201,12 @@ namespace Unity.FPS.Game
                 shootAudioSource.PlayOneShot(shootSfx);
             }
             lastTimeShot = Time.time; //슛 간격을위해 슛한 시간 저장
-            
+        }
+        //projectile 날라가는 방향 
+        Vector3 GetShotDirectionWithinSpread(Transform shootTransfrom)
+        {
+            float spreadAngleRatio = bulletSpreadAngle / 180f;
+            return Vector3.Lerp(shootTransfrom.forward, UnityEngine.Random.insideUnitSphere, spreadAngleRatio);
         }
     }
 }

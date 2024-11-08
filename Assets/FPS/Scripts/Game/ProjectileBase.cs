@@ -27,7 +27,7 @@ namespace Unity.FPS.Game
             InitialDirection = this.transform.forward;          //포지션 앞방향
             InheritedMuzzleVelocity = controller.MuzzleWorldVelocity;   //총수 속도
             InitialCharge = controller.CurrentCharge;                       //충전량
-                
+            
             OnShoot?.Invoke();
         }
     }

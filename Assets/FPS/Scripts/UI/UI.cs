@@ -32,7 +32,7 @@ namespace Unity.FPS.UI
         {
             weaponsManager = GameObject.FindObjectOfType<PlayerWeaponsManager>();
             //액티브한 무기 크로스 헤어 보이기 
-            OnWeaponChanged(weaponsManager.GetActiveWeapon());
+            OnWeaponChanged(weaponsManager.GetActiveWeapon());  //강제로 한번더 보이기
 
             weaponsManager.OnSwitchToWeapon += OnWeaponChanged;
         }
