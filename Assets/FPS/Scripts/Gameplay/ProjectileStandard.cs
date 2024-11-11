@@ -16,19 +16,19 @@ namespace Unity.FPS.Gameplay
         private float maxLifeTime = 5f;
 
         //이동 
-        [SerializeField] private float speed = 300f;      //스피드
-        [SerializeField] private float gravity = 0f;        //중력
+        public float speed = 300f;      //스피드
+        public float gravity = 0f;        //중력
         public Transform root;
         public Transform tip;                        //팁 해드 부분
         private Vector3 velocity;                   //백터 속도
         private Vector3 lastRootPosition;      //루트의 마지막 포지션
         private float shootTime;
-        [SerializeField] private float damage = 15f;        //데미지
-        [SerializeField] private float lifeTime = 2f;           //라이프 타임
+        public float damage = 15f;        //데미지
+        //[SerializeField] private float lifeTime = 2f;           //라이프 타임
         private float spwanTime;
 
         //충돌
-        private float radius = 0.01f;                          //충돌 검사하는 구체의 반경
+        public float radius = 0.01f;                          //충돌 검사하는 구체의 반경
         public LayerMask hittableLayers = -1;          //Hit가 가능한 Layer
         private List<Collider> ignoredColliders;      //Hit 판정시 무시하는 충돌체 리스트   
 
@@ -171,7 +171,7 @@ namespace Unity.FPS.Gameplay
             {
                 //충돌위치에 게임오브젝트를 생성하고 AudioSource 컴포넌트를 추가해서 지정된 클립을 플레이
                 AudioUtilty.CreateSfx(impactSfxClip, point, 1f, 3f);
-                Debug.Log("Play impactSfxClip");
+                //Debug.Log("Play impactSfxClip");
             }
 
 
