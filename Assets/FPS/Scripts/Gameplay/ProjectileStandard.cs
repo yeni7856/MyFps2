@@ -39,6 +39,8 @@ namespace Unity.FPS.Gameplay
 
         public AudioClip impactSfxClip;                     //타격 효과음
 
+        //데미지 
+        private DamageArea damageArea;  
         #endregion
 
 
@@ -46,6 +48,8 @@ namespace Unity.FPS.Gameplay
         {
             projectileBase = GetComponent<ProjectileBase>();
             projectileBase.OnShoot += OnShoot;
+            
+            damageArea = GetComponent<DamageArea>();
 
             Destroy(gameObject, maxLifeTime);       //맞추지 않으면 지워져야함 
         }
@@ -155,6 +159,22 @@ namespace Unity.FPS.Gameplay
         //히트 구현, 데미지, Vfx, Sfx
         void OnHit(Vector3 point, Vector3 normal, Collider collider)
         {
+            //데미지
+            if (damageArea)
+            {
+                damageArea.InflictDamageArea(damage, point, hittableLayers, 
+                    QueryTriggerInteraction.Collide, projectileBase.Owner);
+            }
+            else
+            {
+                Damageable damageable = collider.GetComponent<Damageable>();
+                if (damageable != null)
+                {
+                    damageable.InflictDamage(damage, false, projectileBase.Owner);
+                }
+            }
+           
+
             //Vfx
             //충돌체 바로위에 offset사용해서 약간위에서 스폰위치를 노말방향으로
             if (impackVfxPrefab)
