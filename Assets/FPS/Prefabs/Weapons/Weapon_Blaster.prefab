@@ -277,8 +277,8 @@ MonoBehaviour:
   weaponRoot: {fileID: 1505447205160222267}
   swithcWeaponSfx: {fileID: 8300000, guid: 7aa1f092f3b652347a6536fd0f23662e, type: 3}
   shootType: 1
-  maxAmmo: 8
-  delayBetweenShots: 0.5
+  maxAmmo: 16
+  delayBetweenShots: 0.1
   weaponMuzzle: {fileID: 8334323006752503713}
   muzzleFlashPrefab: {fileID: 748781637555137343, guid: 9f671b22f25370048a18fb1f821294ec,
     type: 3}
@@ -296,6 +296,14 @@ MonoBehaviour:
   recoilForce: 0.5
   projectilePrefab: {fileID: 8070006393710158492, guid: 3c6b27d949cdda749892906e1f1d1b27,
     type: 3}
+  bulletsPerShot: 1
+  bulletSpreadAngle: 0
+  ammoUseOnStartCharge: 1
+  ammoUseRateWhileCharging: 1
+  lastChargeTriggerTimeStamp: 0
+  ammoReloadRate: 1
+  ammoReloadDelay: 2
+  automaticReload: 1
 --- !u!1 &2867801751256125023
 GameObject:
   m_ObjectHideFlags: 0

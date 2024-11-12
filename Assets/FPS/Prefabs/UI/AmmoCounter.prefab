@@ -287,10 +287,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   foregroundImage: {fileID: 645032500597732956}
-  defaultForegroundColor: {r: 0, g: 0, b: 0, a: 1}
+  defaultForegroundColor: {r: 1, g: 1, b: 1, a: 1}
   flashForceGroundColorFull: {r: 0, g: 0, b: 0, a: 0.5019608}
   backgroundImage: {fileID: 645032499974091307}
-  defaultbackgroundColor: {r: 1, g: 1, b: 1, a: 0.5019608}
+  defaultbackgroundColor: {r: 0, g: 0, b: 0, a: 0.5019608}
   flashBackgroundColorEmpty: {r: 1, g: 0, b: 0, a: 0.5019608}
 --- !u!1 &1644869328222790790
 GameObject:
