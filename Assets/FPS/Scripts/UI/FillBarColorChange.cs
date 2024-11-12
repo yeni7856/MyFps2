@@ -17,7 +17,7 @@ namespace Unity.FPS.UI
         public Color flashForceGroundColorFull;             //게이지가 풀로 차는 순간 색 플래시 효과
 
         public Image backgroundImage;                         //백그라운드 이미지
-        public Color defaultbackgroundColor;                //백그라운드 기본색
+        public Color defaultbackgroundColor;                           //백그라운드 기본색
         public Color flashBackgroundColorEmpty;          //백그라운드 비었을때 넣는색
 
         private float fullValue = 1f;                                   //게이지가 풀일때의 값
@@ -52,7 +52,7 @@ namespace Unity.FPS.UI
             else
             {
                 //원래색 돌아오기 
-                foregroundImage.color = Color.Lerp(foregroundImage.color, defaultForegroundColor,
+                foregroundImage.color = Color.Lerp(foregroundImage.color, defaultbackgroundColor,
                     colorChangeSharpness * Time.deltaTime);
                 //백그라운드
                 backgroundImage.color = Color.Lerp(backgroundImage.color, defaultbackgroundColor,
