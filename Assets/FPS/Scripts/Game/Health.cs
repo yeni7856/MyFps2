@@ -27,8 +27,10 @@ namespace Unity.FPS.Game
 
         //힐 아이템을 먹을수 있는지 체크 //풀
         public bool CanPickUp() => CurrentHealth < maxHealth;
+
         //UI Hp 게이지 값
         public float GetRatio() => CurrentHealth / maxHealth;
+
         //Hp위험 체크 
         public bool IsCritical() => GetRatio() <= criticalHealRatio;
 
@@ -48,6 +50,7 @@ namespace Unity.FPS.Game
             CurrentHealth -= damage;
             CurrentHealth = Mathf.Clamp(CurrentHealth, 0, maxHealth);
             Debug.Log($"CurrentHealth : {CurrentHealth}");
+
             //real Damage 구하기
             float realDamage = beforeHp - CurrentHealth;
             if (realDamage > 0)
@@ -58,6 +61,7 @@ namespace Unity.FPS.Game
             //죽음처리
             HandleDeath();
         }
+
         void HandleDeath()
         {
             if (isDeath)
@@ -70,6 +74,7 @@ namespace Unity.FPS.Game
                 OnDie?.Invoke();
             }
         }
+
         //힐
         public void Heal(float heal)
         {

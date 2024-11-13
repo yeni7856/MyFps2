@@ -26,6 +26,7 @@ namespace Unity.FPS.Game
         void OnDamaged(float damage, GameObject damageSource)
         {
             //TODO : 데미지 효과 구현
+
         }
 
         void OnDie()

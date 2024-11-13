@@ -25,6 +25,7 @@ namespace Unity.FPS.Gameplay
     /// <summary>
     /// 플레이어가 가진 WeaponController을 관리 무기들을 관리하는 클래스 
     /// </summary>
+    
     public class PlayerWeaponsManager : MonoBehaviour
     {
         #region Variables
@@ -191,11 +192,11 @@ namespace Unity.FPS.Gameplay
                 //충돌체 위폰카메라 앞방향으로 쏘기
                 if (Physics.Raycast(weaponCamera.transform.position, weaponCamera.transform.forward, out hit, 300f))
                 {
-                    //콜라이더 체크 - 적 판별
-                    Health health = hit.collider.GetComponent<Health>();
-                    if(health != null)
+                    //콜라이더 체크 - 적 판별 (Damageable) 
+                    Damageable damageable = hit.collider.GetComponent<Damageable>();
+                    if(damageable != null)
                     {
-                        IsPointingAtEnemy=true;
+                        IsPointingAtEnemy=true;     //적포착
                     }
                 }
             }

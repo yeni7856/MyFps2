@@ -38,8 +38,8 @@ namespace Unity.FPS.Game
             {
                 //uniqueDamageable.transform.position에서 센터 
                 float distance = Vector3.Distance(uniqueDamageable.transform.position, ceneter);
-                float curveDamage = damage * damageRatioOverDistance.Evaluate(distance);
-                Debug.Log($"curveDamage{curveDamage}");
+                float curveDamage = damage * damageRatioOverDistance.Evaluate(distance/areaOFEffectDistance);
+                Debug.Log($"distance : {distance} - curveDamage : {curveDamage}");
                 uniqueDamageable.InflictDamage(damage, true, owner);
             }
         }
