@@ -23,13 +23,21 @@ namespace Unity.FPS.AI
         public Animator animator;
         private EnemyController enemyController;
 
-        public AIState AiState {  get; private set; }
+        public AIState AiState { get; private set; }
 
         //Audio
+        //이동
         public AudioClip movementSound;
         public MinMaxFloat pitchMoveSpeed;          //재생속도
 
         private AudioSource audioSource;
+
+        //데미지 - 이펙트
+        public ParticleSystem[] randomHitSparks;
+
+        //Detected
+        public ParticleSystem[] detectedVfx;
+        public AudioClip detectedAudio; 
 
         //Animation parameter (상수로)
         const string k_AnimAttackParameter = "Attack";
@@ -47,8 +55,9 @@ namespace Unity.FPS.AI
             audioSource.Play();
 
             enemyController = GetComponent<EnemyController>();
-            enemyController.Damaged += OnDamaged;
-
+            enemyController.Damaged += OnDamaged;                       //등록
+            enemyController.OnDetectedTarget += OnDetected;         
+            enemyController.OnLostTarget += OnLost;
 
 
             //초기화
@@ -57,7 +66,17 @@ namespace Unity.FPS.AI
 
         private void Update()
         {
+            //상태구현
             UpdateCurrentAiState();
+
+            //상태변경
+            UpdateAiStateTransition();
+
+            //속도에 따른 애니/사운드 효과
+            float moveSpeed = enemyController.Agent.velocity.magnitude;
+            animator.SetFloat(k_AnimMoveSpeedParameter, moveSpeed);         //애니
+            audioSource.pitch = pitchMoveSpeed.GetValueFromRatio(moveSpeed / enemyController.Agent.speed);
+
         }
 
         //상태에 따른 Enemy 구현
@@ -70,15 +89,85 @@ namespace Unity.FPS.AI
                     enemyController.SetNavDestination(enemyController.GetDestinationOnPath());
                     break;
                 case AIState.Follow:
+                    //타겟을 향해서
+                    enemyController.SetNavDestination(enemyController.KnownDetectedTarget.transform.position);
+                    enemyController.OrientToward(enemyController.KnownDetectedTarget.transform.position);
+                    enemyController.OrientWeaponsToward(enemyController.KnownDetectedTarget.transform.position);
                     break;
                 case AIState.Attack:
+                    enemyController.OrientToward(enemyController.KnownDetectedTarget.transform.position);
+                    enemyController.OrientWeaponsToward(enemyController.KnownDetectedTarget.transform.position);
+                    enemyController.TryAttack(enemyController.KnownDetectedTarget.transform.position);
+                    break;
+            }
+        }
+
+        //상태 변경에 따른 구현
+       void UpdateAiStateTransition()
+        {
+            switch (AiState)
+            {
+                case AIState.Patrol:
+                    break;
+                case AIState.Follow:
+                    if (enemyController.IsSeeingTarget && enemyController.IsTargetInAttackRange)
+                    {
+                        AiState = AIState.Attack;
+                        enemyController.SetNavDestination(transform.position);  //정지
+                    }
+                    break;
+                case AIState.Attack:
+                    if(enemyController.IsTargetInAttackRange == false)
+                    {
+                        AiState = AIState.Follow;
+                    }
                     break;
             }
         }
 
         void OnDamaged()
         {
+            //스파크 파티클 - 랜덤하게 하나 선택해서 플레이
+            if (randomHitSparks.Length > 0)
+            {
+                int randNum = Random.Range(0, randomHitSparks.Length);
+                randomHitSparks[randNum].Play();
+            }
+            //데미지 애니
+            animator.SetTrigger(k_AnimOnDamagedParameter);
+        }
 
+        //타겟 찾았을때
+        void OnDetected()
+        {
+            //상태 변경
+            AiState = AIState.Follow;
+
+            //Vfx
+            for(int i = 0; i < detectedVfx.Length; i++)
+            {
+                detectedVfx[i].Play();      
+            }
+            //Sfx
+            if (detectedAudio)
+            {
+                AudioUtilty.CreateSfx(detectedAudio, this.transform.position, 1f);
+            }
+            //anim
+            animator.SetBool(k_AnimAlertedParameter, true);
+        }
+
+        //타겟 잃어버렸을때
+        void OnLost()
+        {
+            //Vfx
+            for (int i = 0; i < detectedVfx.Length; i++)
+            {
+                detectedVfx[i].Stop();
+            }
+
+            //anim
+            animator.SetBool(k_AnimAlertedParameter, false);
         }
     }
 }

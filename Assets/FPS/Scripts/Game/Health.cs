@@ -49,7 +49,7 @@ namespace Unity.FPS.Game
             float beforeHp = CurrentHealth; //데미지 입기전에 hp
             CurrentHealth -= damage;
             CurrentHealth = Mathf.Clamp(CurrentHealth, 0, maxHealth);
-            Debug.Log($"CurrentHealth : {CurrentHealth}");
+            //Debug.Log($"CurrentHealth : {CurrentHealth}");
 
             //real Damage 구하기
             float realDamage = beforeHp - CurrentHealth;
