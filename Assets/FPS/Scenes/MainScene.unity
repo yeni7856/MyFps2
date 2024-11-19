@@ -971,6 +971,39 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2729281213054440677}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1072035740
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1072035741}
+  m_Layer: 0
+  m_Name: HitBox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1072035741
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1072035740}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.44688272, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2840826129505751922}
+  - {fileID: 1521007958257993888}
+  m_Father: {fileID: 7886326313861291794}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1146676878 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5963937743390997973, guid: 7042f8fe21debc944b5bdc894f478d63,
@@ -3017,11 +3050,11 @@ Transform:
   m_GameObject: {fileID: 594405855786467464}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.44688272, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7886326313861291794}
+  m_Father: {fileID: 1072035741}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!225 &1609812473142640188
 CanvasGroup:
@@ -3480,7 +3513,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2015434656062235448}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 55, y: -7.7, z: 17}
   m_LocalScale: {x: 4, y: 4, z: 4}
   m_ConstrainProportionsScale: 0
@@ -3489,7 +3522,7 @@ Transform:
   - {fileID: 1695247526106032251}
   - {fileID: 8252367101852286357}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!1 &2015434656062235448
 GameObject:
   m_ObjectHideFlags: 0
@@ -3499,6 +3532,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2015434656062235444}
+  - component: {fileID: 2015434656062235449}
+  - component: {fileID: 2015434656062235450}
+  - component: {fileID: 2015434656062235451}
   m_Layer: 0
   m_Name: Enemy_Turret
   m_TagString: Untagged
@@ -3506,6 +3542,48 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &2015434656062235449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2015434656062235448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 866cfe6dfb00a864993cb4e7ec64799d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 150
+  criticalHealRatio: 0.3
+--- !u!114 &2015434656062235450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2015434656062235448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04d8f7649205fe7438e11c503ac1d41b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2015434656062235451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2015434656062235448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08c8d06854d189945b271b649646dcc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: {fileID: 2015434656062235449}
+  healthBar: {fileID: 5299349969209593493}
+  healthBarPivot: {fileID: 1695247526106032251}
+  hideFullHealthBar: 1
 --- !u!4 &2096565385821789687
 Transform:
   m_ObjectHideFlags: 0
@@ -6991,7 +7069,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7886326313861291796}
+  m_Father: {fileID: 1072035741}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!222 &2915308686443316301
 CanvasRenderer:
@@ -9818,11 +9896,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 400018, guid: fad35a70731ab804c975c717ee8862a5,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1521007958257993888}
-    - targetCorrespondingSourceObject: {fileID: 400006, guid: fad35a70731ab804c975c717ee8862a5,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2840826129505751922}
+      addedObject: {fileID: 1072035741}
     - targetCorrespondingSourceObject: {fileID: 400006, guid: fad35a70731ab804c975c717ee8862a5,
         type: 3}
       insertIndex: -1
